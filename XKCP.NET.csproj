@@ -15,6 +15,7 @@
         <RepositoryType>git</RepositoryType>
         <Company>Stirling Labs</Company>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     </PropertyGroup>
@@ -35,5 +36,10 @@
             <Link>%(Identity)</Link>
         </None>
         <Content Remove="runtimes\*\**" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Remove="XKCP.NET.Tests\**" />
+      <Compile Remove="XKCP.NET.Tests\**" />
+        <EmbeddedResource Remove="XKCP.NET.Tests\**" />
     </ItemGroup>
 </Project>
