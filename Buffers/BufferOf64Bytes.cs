@@ -5,10 +5,14 @@ using JetBrains.Annotations;
 
 namespace StirlingLabs.Buffers
 {
+    using BufferType = BufferOf64Bytes;
+
     [PublicAPI]
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = ConstLength)]
     public struct BufferOf64Bytes
     {
+        public static BufferComparer Comparer => BufferComparer.Instance;
+
         public const int ConstLength = 64;
 
         public int Length
@@ -56,6 +60,47 @@ namespace StirlingLabs.Buffers
                 return MemoryMarshal.CreateSpan(ref startRef, length);
             }
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator Span<byte>(BufferType buf)
+            => MemoryMarshal.CreateSpan(ref buf.GetPinnableReference(), ConstLength);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator ReadOnlySpan<byte>(BufferType buf)
+            => MemoryMarshal.CreateReadOnlySpan(ref buf.GetPinnableReference(), ConstLength);
+
+        public override string ToString()
+            => Convert.ToHexString(this);
+
+        public bool Equals(BufferType other)
+            => ((ReadOnlySpan<byte>)this).SequenceEqual(other);
+
+        public override bool Equals(object obj)
+            => obj is BufferType other && Equals(other);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override int GetHashCode()
+            => BufferHelper.GetHashCode(ref this[0u], ConstLength);
+
+        public static bool operator ==(BufferType left, BufferType right)
+            => left.Equals(right);
+
+        public static bool operator !=(BufferType left, BufferType right)
+            => !left.Equals(right);
+        public int CompareTo(BufferType other)
+            => ((ReadOnlySpan<byte>)this).SequenceCompareTo(other);
+
+        public static bool operator <(BufferType left, BufferType right)
+            => ((ReadOnlySpan<byte>)left).SequenceCompareTo(right) < 0;
+
+        public static bool operator >(BufferType left, BufferType right)
+            => ((ReadOnlySpan<byte>)left).SequenceCompareTo(right) > 0;
+
+        public static bool operator <=(BufferType left, BufferType right)
+            => ((ReadOnlySpan<byte>)left).SequenceCompareTo(right) <= 0;
+
+        public static bool operator >=(BufferType left, BufferType right)
+            => ((ReadOnlySpan<byte>)left).SequenceCompareTo(right) >= 0;
 
         [FieldOffset(0)]
         private byte _0;
