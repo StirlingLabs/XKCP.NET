@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>StirlingLabs</RootNamespace>
+        <AssemblyName>XKCP.NET</AssemblyName>
+        <TargetFramework>net5.0</TargetFramework>
+        <PackageVersion>2.0.16</PackageVersion>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Title>XKCP.NET</Title>
+        <Authors>Stirling Labs</Authors>
+        <PackageProjectUrl>https://github.com/StirlingLabs/XKCP.NET</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/StirlingLabs/XKCP.NET.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <Company>Stirling Labs</Company>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="iCPUID" Version="1.0.3" />
+        <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" PrivateAssets="All" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="runtimes\*\**">
+            <Pack>True</Pack>
+            <PackagePath>runtimes\</PackagePath>
+            <PackageCopyToOutput>False</PackageCopyToOutput>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+            <Link>%(Identity)</Link>
+        </None>
+        <Content Remove="runtimes\*\**" />
+    </ItemGroup>
+</Project>
