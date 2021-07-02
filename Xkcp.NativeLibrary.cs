@@ -6,7 +6,7 @@ using iTin.Hardware.Specification.Cpuid;
 
 namespace StirlingLabs
 {
-    public static unsafe partial class Xkcp
+    public static partial class Xkcp
     {
         static Xkcp()
         {

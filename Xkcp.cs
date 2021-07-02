@@ -11,7 +11,7 @@ namespace StirlingLabs
 {
     [PublicAPI]
     [SuppressMessage("Interoperability", "CA1401", Justification = "Desired.")]
-    public static unsafe partial class Xkcp
+    public static partial class Xkcp
     {
         private static readonly bool Avx512IsSupported;
 
