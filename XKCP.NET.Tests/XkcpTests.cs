@@ -105,16 +105,11 @@ namespace StirlingLabs
         public static void Sha3_256(byte[] message, byte[] digest)
         {
 
-            var actual = new byte[32];
-
-            var success = Xkcp.Sha3_256(actual, message);
+            var success = Xkcp.Sha3_256(out var actual, message);
 
             Assert.IsTrue(success);
 
             var expected = (ReadOnlySpan<byte>)digest;
-
-            var expectedHex = Convert.ToHexString(expected);
-            var actualHex = Convert.ToHexString(actual);
 
             Assert.IsTrue(expected.SequenceEqual((Span<byte>)actual));
         }

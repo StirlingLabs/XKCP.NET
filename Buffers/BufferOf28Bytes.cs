@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -9,6 +10,7 @@ namespace StirlingLabs.Buffers
     using BufferType = BufferOf28Bytes;
 
     [PublicAPI]
+    [DebuggerDisplay("{" + nameof(HexString) + "}")]
     [StructLayout(LayoutKind.Explicit, Size = ConstLength)]
     public struct BufferOf28Bytes
     {
@@ -72,6 +74,8 @@ namespace StirlingLabs.Buffers
 
         public override string ToString()
             => Convert.ToHexString(this);
+
+        public string HexString => ToString();
 
         public bool Equals(BufferType other)
             => ((ReadOnlySpan<byte>)this).SequenceEqual(other);
