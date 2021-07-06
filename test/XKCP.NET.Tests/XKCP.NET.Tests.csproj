@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\XKCP.NET.csproj" />
+      <ProjectReference Include="..\..\src\XKCP.NET\XKCP.NET.csproj" />
     </ItemGroup>
 
 </Project>
