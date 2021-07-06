@@ -1,32 +1,15 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics.X86;
-using iTin.Hardware.Specification;
-using iTin.Hardware.Specification.Cpuid;
 
 namespace StirlingLabs
 {
     public static partial class Xkcp
     {
-        static Xkcp()
-        {
-            try
-            {
-                if (CPUID.Instance.IsAvailable)
-                {
-                    var avx512 = CPUID.Instance.Leafs.GetProperty(LeafProperty.ExtendedFeatures.AVX512_F);
-                    if (avx512.Success)
-                    {
-                        Avx512IsSupported = (bool)avx512.Result.Value;
-                    }
-                }
-            }
-            catch
-            {
-                Avx512IsSupported = false;
-            }
+        private static readonly bool Avx512IsSupported = ((X86Base.CpuId(7, 0).Ebx >> 16) & 1) != 0;
 
-            NativeLibrary.SetDllImportResolver(typeof(Xkcp).Assembly, (name, assembly, path) => {
+        static Xkcp()
+            => NativeLibrary.SetDllImportResolver(typeof(Xkcp).Assembly, (name, assembly, path) => {
                 nint lib;
                 if (name != "XKCP")
                     return default;
@@ -131,6 +114,5 @@ namespace StirlingLabs
 
                 throw new DllNotFoundException("XKCP native library not found.");
             });
-        }
     }
 }
