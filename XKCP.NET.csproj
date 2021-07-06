@@ -6,7 +6,7 @@
         <RootNamespace>StirlingLabs</RootNamespace>
         <AssemblyName>XKCP.NET</AssemblyName>
         <TargetFramework>net5.0</TargetFramework>
-        <PackageVersion>2021.7</PackageVersion>
+        <PackageVersion>2021.7.1</PackageVersion>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <Title>XKCP.NET</Title>
         <Authors>Stirling Labs</Authors>
