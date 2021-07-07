@@ -20,3 +20,5 @@ jobs:
         name: Upload Coverage 
         with:
           lcov-file: ./coverlet/lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          

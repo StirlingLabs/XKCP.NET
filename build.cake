@@ -95,7 +95,7 @@ Task ("Pack")
 	});
 Task("Push")
 .Does(()=>{
-	var apiKey=	EnvironmentVariable("nugetKey");
+	var apiKey=	EnvironmentVariable("GITHUB_TOKEN");
 	 var settings = new DotNetCoreNuGetPushSettings
      {
          Source = nugetFeed,
