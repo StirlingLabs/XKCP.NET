@@ -16,6 +16,9 @@
         <Company>Stirling Labs</Company>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <MinVerMinimumMajorMinor>1.2</MinVerMinimumMajorMinor>
+        <MinVerTagPrefix>v</MinVerTagPrefix>
+        <MinVerDefaultPreReleasePhase>beta</MinVerDefaultPreReleasePhase>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     </PropertyGroup>
@@ -24,6 +27,7 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" PrivateAssets="All" />
+        <PackageReference Include="MinVer" Version="2.5.0"/>
     </ItemGroup>
     <ItemGroup>
         <None Include="runtimes\*\**">
