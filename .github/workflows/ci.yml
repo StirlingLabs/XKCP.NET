@@ -1,0 +1,24 @@
+name: CI
+on: [push,pull_request]
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        uses: cake-build/cake-action@v1
+        with:
+          target: Build
+      - name: Run Test
+        uses: cake-build/cake-action@v1
+        with:
+          target: Run-Tests
+      - uses: romeovs/lcov-reporter-action@v0.2.21
+        name: Upload Coverage 
+        with:
+          lcov-file: ./coverlet/lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          

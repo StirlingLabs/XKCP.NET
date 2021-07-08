@@ -89,26 +89,26 @@ namespace StirlingLabs
                     {
                         if (NativeLibrary.TryLoad("libXKCP-AVX512.dylib", out lib))
                             return lib;
-                        if (NativeLibrary.TryLoad("runtimes/linux-x64/native/libXKCP-AVX512.dylib", out lib))
+                        if (NativeLibrary.TryLoad("runtimes/osx-x64/native/libXKCP-AVX512.dylib", out lib))
                             return lib;
                     }
                     if (Avx2.IsSupported)
                     {
                         if (NativeLibrary.TryLoad("libXKCP-AVX2.dylib", out lib))
                             return lib;
-                        if (NativeLibrary.TryLoad("runtimes/linux-x64/native/libXKCP-AVX2.dylib", out lib))
+                        if (NativeLibrary.TryLoad("runtimes/osx-x64/native/libXKCP-AVX2.dylib", out lib))
                             return lib;
                     }
                     if (Sse3.IsSupported)
                     {
                         if (NativeLibrary.TryLoad("libXKCP-SSE3.dylib", out lib))
                             return lib;
-                        if (NativeLibrary.TryLoad("runtimes/linux-x64/native/libXKCP-SSE3.dylib", out lib))
+                        if (NativeLibrary.TryLoad("runtimes/osx-x64/native/libXKCP-SSE3.dylib", out lib))
                             return lib;
                     }
                     if (NativeLibrary.TryLoad("libXKCP.dylib", out lib))
                         return lib;
-                    if (NativeLibrary.TryLoad("runtimes/win-x64/native/libXKCP.dylib", out lib))
+                    if (NativeLibrary.TryLoad("runtimes/osx-x64/native/libXKCP.dylib", out lib))
                         return lib;
                 }
 
