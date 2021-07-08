@@ -80,7 +80,7 @@ namespace StirlingLabs
                     }
                     if (NativeLibrary.TryLoad("libXKCP.so", out lib))
                         return lib;
-                    if (NativeLibrary.TryLoad("runtimes/win-x64/native/libXKCP.so", out lib))
+                    if (NativeLibrary.TryLoad("runtimes/linux-x64/native/libXKCP.so", out lib))
                         return lib;
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
