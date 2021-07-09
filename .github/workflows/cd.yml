@@ -11,10 +11,15 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-dotnet@v1.8.1
+        with:
+          dotnet-version: 5.0.x
       - name: Build
-        run: dotnet build
+        run: dotnet build XKCP.NET.sln
       - name: Test
-        run: dotnet test --no-build
+        run: dotnet test XKCP.NET.sln --no-build
       - name: Push NuPkg
         run: dotnet nuget push artifacts/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate --no-symbols
       - name: Artifacts
