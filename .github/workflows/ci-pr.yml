@@ -1,0 +1,30 @@
+name: Integration for PRs
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-dotnet@v1.8.1
+        with:
+          dotnet-version: 5.0.x
+      - name: Build
+        run: dotnet build XKCP.NET.sln -c Release
+      - name: Test
+        run: dotnet test XKCP.NET.sln --no-build -c Release
+      - name: Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: XKCP.NET
+          path: |
+            artifacts/*.nupkg
+          if-no-files-found: error
+      - name: Report Coverage to PR
+        uses: zattoo/output@v1
+        with:
+          sources: coverage/
+          token: ${{github.token}}

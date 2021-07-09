@@ -8,6 +8,7 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <PackageOutputPath>../artifacts</PackageOutputPath>
         <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+        <DeterministicSourcePaths Condition="'$(Configuration)'=='Release'">true</DeterministicSourcePaths>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations" Version="2021.1.0" PrivateAssets="All" />
