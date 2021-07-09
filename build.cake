@@ -101,7 +101,7 @@ Task("Push")
          Source = nugetFeed,
          ApiKey =apiKey,
      };
-	 var path =  GetFiles ("./XKCP.NET.*.nupkg").First ();
+	 var path =  GetFiles ("./artifacts/XKCP.NET.*.nupkg").First ();
      DotNetCoreNuGetPush(path.FullPath, settings);
 });
 
