@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XKCP.NET", "src\XKCP.NET\XKCP.NET.csproj", "{E4F045EF-D44B-4AE0-BBBC-AD05C0C9D890}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XKCP.NET", "XKCP.NET\XKCP.NET.csproj", "{E4F045EF-D44B-4AE0-BBBC-AD05C0C9D890}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XKCP.NET.Tests", "test\XKCP.NET.Tests\XKCP.NET.Tests.csproj", "{937C6A21-A2FF-4BFD-B382-11D87D19B130}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XKCP.NET.Tests", "XKCP.NET.Tests\XKCP.NET.Tests.csproj", "{937C6A21-A2FF-4BFD-B382-11D87D19B130}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

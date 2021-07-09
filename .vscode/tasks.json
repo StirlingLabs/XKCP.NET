@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/test/XKCP.NET.Tests/XKCP.NET.Tests.csproj",
+                "${workspaceFolder}/XKCP.NET.Tests/XKCP.NET.Tests.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/test/XKCP.NET.Tests/XKCP.NET.Tests.csproj",
+                "${workspaceFolder}/XKCP.NET.Tests/XKCP.NET.Tests.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +32,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/test/XKCP.NET.Tests/XKCP.NET.Tests.csproj",
+                "${workspaceFolder}/XKCP.NET.Tests/XKCP.NET.Tests.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

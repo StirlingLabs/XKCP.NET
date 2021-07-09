@@ -2,23 +2,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>StirlingLabs</RootNamespace>
-        <AssemblyName>XKCP.NET</AssemblyName>
         <TargetFramework>net5.0</TargetFramework>
-        <PackageVersion>2021.7.1</PackageVersion>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Title>XKCP.NET</Title>
-        <Authors>Stirling Labs</Authors>
-        <PackageProjectUrl>https://github.com/StirlingLabs/XKCP.NET</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/StirlingLabs/XKCP.NET.git</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
-        <Company>Stirling Labs</Company>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <MinVerMinimumMajorMinor>1.2</MinVerMinimumMajorMinor>
-        <MinVerTagPrefix>v</MinVerTagPrefix>
-        <MinVerDefaultPreReleasePhase>beta</MinVerDefaultPreReleasePhase>
+        <PackageOutputDir>../artifacts</PackageOutputDir>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     </PropertyGroup>
@@ -26,8 +14,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" PrivateAssets="All" />
-        <PackageReference Include="MinVer" Version="2.5.0"/>
+        <PackageReference Include="JetBrains.Annotations" Version="2021.1.0" PrivateAssets="All" />
     </ItemGroup>
     <ItemGroup>
         <None Include="runtimes\*\**">
@@ -40,9 +27,7 @@
         </None>
         <Content Remove="runtimes\*\**" />
     </ItemGroup>
-    <ItemGroup>
-        <None Remove="XKCP.NET.Tests\**" />
-      <Compile Remove="XKCP.NET.Tests\**" />
-        <EmbeddedResource Remove="XKCP.NET.Tests\**" />
-    </ItemGroup>
+    <ImportGroup>
+        <Import Project="../Version.proj" />
+    </ImportGroup>
 </Project>
