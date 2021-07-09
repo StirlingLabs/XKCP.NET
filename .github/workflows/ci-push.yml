@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
   workflow_dispatch:
 jobs:
   build-and-test:
@@ -26,8 +25,15 @@ jobs:
           path: |
             artifacts/*.nupkg
           if-no-files-found: error
-      - uses: romeovs/lcov-reporter-action@v0.2.21
-        name: Upload Coverage 
+      - name: Read and escape coverage summary
+        id: get-comment-body
+        run: |
+          body=$(cat coverage/Summary.md)
+          body="${body//'%'/'%25'}"
+          body="${body//$'\n'/'%0A'}"
+          body="${body//$'\r'/'%0D'}" 
+          echo ::set-output name=body::$body
+      - name: Create coverage commit comment
+        uses: peter-evans/commit-comment@v1
         with:
-          lcov-file: ./coverage/lcov.info
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          body: ${{ steps.get-comment-body.outputs.body }}
