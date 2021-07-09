@@ -26,3 +26,8 @@ jobs:
           path: |
             artifacts/*.nupkg
           if-no-files-found: error
+      - uses: romeovs/lcov-reporter-action@v0.2.21
+        name: Upload Coverage 
+        with:
+          lcov-file: ./coverage/lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
