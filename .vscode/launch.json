@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/test/XKCP.NET.Tests/bin/Debug/net5.0/XKCP.NET.Tests.dll",
+            "program": "${workspaceFolder}/XKCP.NET.Tests/bin/Debug/net5.0/XKCP.NET.Tests.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/test/XKCP.NET.Tests",
+            "cwd": "${workspaceFolder}/XKCP.NET.Tests",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
