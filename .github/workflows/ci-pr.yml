@@ -26,5 +26,5 @@ jobs:
       - name: Report Coverage to PR
         uses: zattoo/output@v1
         with:
-          sources: coverage/
+          sources: '.github/coverage/prefix,coverage/,.github/coverage/suffix'
           token: ${{github.token}}
