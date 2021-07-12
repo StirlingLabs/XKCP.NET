@@ -22,13 +22,16 @@ jobs:
         run: dotnet test XKCP.NET.sln --no-build -c Release
       - name: Push NuPkg
         run: dotnet nuget push artifacts/*.nupkg -k ${{github.token}} -s https://nuget.pkg.github.com/${{github.repository_owner}}/index.json --skip-duplicate --no-symbols
-#      - name: Coverage report artifacts
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: XKCP.NET
-#          path: |
-#            coverage
-#          if-no-files-found: error
+      - name: Save coverage to storage branch
+        uses: sylvanld/action-storage@v1
+        with:
+          comment: |
+            Coverage for ${{github.ref}}
+            Action: https://github.com/${{github.repository_owner}}/${{github.repository}}/actions/runs/${{github.run_id}}
+            Commit: https://github.com/${{github.repository_owner}}/${{github.repository}}/commit/${{github.sha}}
+          storage-branch: coverage
+          src: coverage
+          dst: coverage
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
