@@ -1,4 +1,5 @@
 ![coverage badge](https://github.com/StirlingLabs/XKCP.NET/blob/coverage/coverage/badge_combined.svg)
+[![CodeFactor](https://www.codefactor.io/repository/github/stirlinglabs/xkcp.net/badge?s=8bddb54013ecc622805241b6565eae25fb07ef5c)](https://www.codefactor.io/repository/github/stirlinglabs/xkcp.net)
 
 <img src="./Docs/XKCP-Anna-banner-dotnet.svg" width="60%" />
 

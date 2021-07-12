@@ -26,16 +26,18 @@ jobs:
           name: XKCP.NET
           path: |
             artifacts/*.nupkg
+            coverage
           if-no-files-found: error
-      - name: Read and escape coverage summary
-        id: get-comment-body
-        run: |
-          body=$(cat coverage/Summary.md)
-          body="${body//'%'/'%25'}"
-          body="${body//$'\n'/'%0A'}"
-          body="${body//$'\r'/'%0D'}" 
-          echo ::set-output name=body::$body
-      - name: Create coverage commit comment
-        uses: peter-evans/commit-comment@v1
-        with:
-          body: ${{steps.get-comment-body.outputs.body}}
+# disable right now to evade comments turning into email spam
+#      - name: Read and escape coverage summary
+#        id: get-comment-body
+#        run: |
+#          body=$(cat coverage/Summary.md)
+#          body="${body//'%'/'%25'}"
+#          body="${body//$'\n'/'%0A'}"
+#          body="${body//$'\r'/'%0D'}" 
+#          echo ::set-output name=body::$body
+#      - name: Create coverage commit comment
+#        uses: peter-evans/commit-comment@v1
+#        with:
+#          body: ${{steps.get-comment-body.outputs.body}}
