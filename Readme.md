@@ -1,3 +1,5 @@
+![coverage badge](https://github.com/StirlingLabs/XKCP.NET/blob/coverage/coverage/badge_combined.svg)
+
 <img src="./Docs/XKCP-Anna-banner-dotnet.svg" width="60%" />
 
 # What is XKCP?
