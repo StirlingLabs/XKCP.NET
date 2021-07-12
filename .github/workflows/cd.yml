@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{matrix.os}}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -30,14 +30,17 @@ jobs:
               dotnet nuget push artifacts/*.nupkg -k $TOKEN -s https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate --no-symbols
             fi
         env:
-          TOKEN: ${{github.token}}            
-      - name: Artifacts
-        uses: actions/upload-artifact@v2
+          TOKEN: ${{github.token}}   
+      - name: Save coverage to storage branch
+        uses: sylvanld/action-storage@v1
         with:
-          name: XKCP.NET
-          path: |
-            artifacts/*.nupkg
-          if-no-files-found: error
+          comment: |
+            Coverage for ${{github.ref}}
+            Action: https://github.com/${{github.repository_owner}}/${{github.repository}}/actions/runs/${{github.run_id}}
+            Commit: https://github.com/${{github.repository_owner}}/${{github.repository}}/commit/${{github.sha}}
+          storage-branch: coverage
+          src: coverage
+          dst: coverage
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
