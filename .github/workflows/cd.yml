@@ -5,10 +5,7 @@ on:
       - 'v*'
 jobs:
   create-release:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${{matrix.os}}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
