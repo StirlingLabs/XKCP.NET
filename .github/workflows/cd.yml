@@ -21,7 +21,16 @@ jobs:
       - name: Test
         run: dotnet test XKCP.NET.sln --no-build -c Release
       - name: Push NuPkg
-        run: dotnet nuget push artifacts/*.nupkg -k ${{github.token}} -s https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate --no-symbols
+        shell: bash
+        run: 
+          |
+            if [ "$RUNNER_OS" == "Windows" ]; then
+              dotnet nuget push artifacts/*.nupkg -k $env:TOKEN -s https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate --no-symbols
+            else
+              dotnet nuget push artifacts/*.nupkg -k $TOKEN -s https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate --no-symbols
+            fi
+        env:
+          TOKEN: ${{github.token}}            
       - name: Artifacts
         uses: actions/upload-artifact@v2
         with:
