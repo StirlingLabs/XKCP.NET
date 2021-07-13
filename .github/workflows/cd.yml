@@ -20,7 +20,7 @@ jobs:
       - name: Test
         run: dotnet test XKCP.NET.sln --no-build -c Release
       - name: Push NuPkg
-        run: dotnet nuget push artifacts/*.nupkg -k ${{github.token}} -s https://nuget.pkg.github.com/${{github.repository_owner}}/index.json -n
+        run: dotnet nuget push artifacts/*.nupkg -k ${{github.token}} -s https://nuget.pkg.github.com/${{github.repository_owner}}/index.json -n 1
       - name: Save coverage to storage branch
         uses: sylvanld/action-storage@v1
         with:
