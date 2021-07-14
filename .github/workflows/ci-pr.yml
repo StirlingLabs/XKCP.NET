@@ -17,7 +17,7 @@ jobs:
       - name: Build
         run: dotnet build XKCP.NET.sln -c Release
       - name: Test
-        run: dotnet test XKCP.NET.sln --no-build -c Release
+        run: dotnet test XKCP.NET.sln --no-build -c Release --logger GitHubActions
       - name: Artifacts
         uses: actions/upload-artifact@v2
         with:
