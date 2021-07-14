@@ -23,7 +23,7 @@ jobs:
           version: "tags/${{ github.event.client_payload.tag }}"
           file: "XKCP-osx.tar.gz"
           target: "tmp/XKCP-osx.tar.gz"
-          token: ${{ secrets.GITHUB_TOKEN }}          
+          token: ${{ secrets.GITHUB_TOKEN }}       
       - name: Download Linux Release
         uses: dsaltares/fetch-gh-release-asset@master
         with:
@@ -48,7 +48,7 @@ jobs:
           cp tmp/osx/*.dylib XKCP.NET/runtimes/osx-x64/native/
           cp tmp/win/*.dll XKCP.NET/runtimes/win-x64/native/
           # Clean
-          rm -rf tmp/      
+          rm -rf tmp/
       - name: Create new commit
         run: |
           git config --global user.email "daemon@stirlinglabs.com"
