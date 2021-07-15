@@ -44,7 +44,7 @@ jobs:
           tar --wildcards --overwrite -xzvpf XKCP-win.tar.gz -C XKCP.NET/runtimes/win-x64/native/ '*.dll'
           ls -l XKCP.NET/runtimes/win-x64/native/
           # Commit changes
-          git add -A XKCP.NET/runtimes
+          git add -fA -- XKCP.NET/runtimes/**/*
           git commit -m "New version of StirlingLabs/XKCP ${{ github.event.client_payload.tag }}"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
