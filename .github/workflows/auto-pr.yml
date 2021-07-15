@@ -8,8 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # unshallow
       - name: Download Windows Release
         uses: dsaltares/fetch-gh-release-asset@master
         with:
@@ -45,6 +43,7 @@ jobs:
           tar --wildcards --overwrite -xf XKCP-win.tar.gz -C XKCP.NET/runtimes/win-x64/native/ '*.dll'
           # Commit changes
           rm -rf XKCP-
+          git ls-files -s --debug *.so *.dylib *.dll
           git commit -am "New version of StirlingLabs/XKCP ${{ github.event.client_payload.tag }}"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
