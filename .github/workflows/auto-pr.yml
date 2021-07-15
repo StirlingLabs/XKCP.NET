@@ -14,8 +14,7 @@ jobs:
           version: "tags/${{ github.event.client_payload.tag }}"
           file: "XKCP-win.tar.gz"
           target: "tmp/XKCP-win.tar.gz"
-          token: ${{ secrets.GITHUB_TOKEN }}
-
+          token: ${{ github.token }}
       - name: Download OSX Release
         uses: dsaltares/fetch-gh-release-asset@master
         with:
@@ -23,7 +22,7 @@ jobs:
           version: "tags/${{ github.event.client_payload.tag }}"
           file: "XKCP-osx.tar.gz"
           target: "tmp/XKCP-osx.tar.gz"
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
       - name: Download Linux Release
         uses: dsaltares/fetch-gh-release-asset@master
         with:
@@ -31,39 +30,27 @@ jobs:
           version: "tags/${{ github.event.client_payload.tag }}"
           file: "XKCP-linux.tar.gz"
           target: "tmp/XKCP-linux.tar.gz"
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Extract artifacts
+          token: ${{ github.token }}
+      - name: Extract and commit artifacts
         run: |
-          sudo chown $(whoami):$(whoami) tmp/
+          # Configure Git
+          git config user.email "daemon@stirlinglabs.com"
+          git config user.name "StirlingLabsDaemon"
           # Extract Files
-          mkdir -p tmp/linux && tar -xzvf tmp/XKCP-linux.tar.gz -C tmp/linux
-          mkdir -p tmp/osx && tar -xzvf tmp/XKCP-osx.tar.gz -C tmp/osx
-          mkdir -p tmp/win && tar -xzvf tmp/XKCP-win.tar.gz -C tmp/win
-          # Clean Old Library
-          rm XKCP.NET/runtimes/linux-x64/native/*
-          rm XKCP.NET/runtimes/osx-x64/native/*
-          rm XKCP.NET/runtimes/win-x64/native/*
-          # Copy files
-          cp tmp/linux/*.so XKCP.NET/runtimes/linux-x64/native/
-          cp tmp/osx/*.dylib XKCP.NET/runtimes/osx-x64/native/
-          cp tmp/win/*.dll XKCP.NET/runtimes/win-x64/native/
-          # Clean
-          rm -rf tmp/
-      - name: Create new commit
-        run: |
-          git config --global user.email "daemon@stirlinglabs.com"
-          git config --global user.name "StirlingLabsDaemon"
+          tar -xzvf --overwrite tmp/XKCP-linux.tar.gz -C XKCP.NET/runtimes/linux-x64/native/ '*.so'
+          tar -xzvf --overwrite tmp/XKCP-osx.tar.gz -C XKCP.NET/runtimes/osx-x64/native/ '*.dylib'
+          tar -xzvf --overwrite tmp/XKCP-win.tar.gz -C XKCP.NET/runtimes/win-x64/native/ '*.dll'
+          # Commit changes
           git add -A
           git commit -m "New release XKCP ${{ github.event.client_payload.tag }}"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
           title: 'New version XKCP ${{ github.event.client_payload.tag }}'
           branch: check-xkcp
           body: |
-            [${{ github.event.client_payload.tag }} release of XKCP][1]
-            [1]: https://github.com/StirlingLabs/XKCP/releases/tag/${{ github.event.client_payload.tag }}
+            [${{ github.event.client_payload.tag }} release of XKCP](https://github.com/StirlingLabs/XKCP/releases/tag/${{ github.event.client_payload.tag }})
           labels: |
             automated-pr
             xkcp
