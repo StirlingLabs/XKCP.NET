@@ -42,12 +42,12 @@ jobs:
           tar -xzvf --overwrite tmp/XKCP-win.tar.gz -C XKCP.NET/runtimes/win-x64/native/ '*.dll'
           # Commit changes
           git add -A
-          git commit -m "New release XKCP ${{ github.event.client_payload.tag }}"
+          git commit -m "New version of XKCP ${{ github.event.client_payload.tag }}"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ github.token }}
-          title: 'New version XKCP ${{ github.event.client_payload.tag }}'
+          title: 'New version of XKCP ${{ github.event.client_payload.tag }}'
           branch: check-xkcp
           body: |
             [${{ github.event.client_payload.tag }} release of XKCP](https://github.com/StirlingLabs/XKCP/releases/tag/${{ github.event.client_payload.tag }})
