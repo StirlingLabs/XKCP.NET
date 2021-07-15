@@ -1,9 +1,9 @@
-name: Auto Pr
+name: Create PR from new XKCP Release
 on:
   repository_dispatch:
     types: [release]
 jobs:
-  linux:
+  fetch-new-xkcp-artifacts-and-create-pr:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
