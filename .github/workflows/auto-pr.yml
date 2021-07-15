@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Fetch git metadata for committing to runtimes
-        run: git pull -f --update-shallow origin $(git branch --show-current)
+        with:
+          depth: 0 # unshallow
       - name: Download Windows Release
         uses: dsaltares/fetch-gh-release-asset@master
         with:
