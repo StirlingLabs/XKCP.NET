@@ -1,7 +1,8 @@
 name: Create PR from new XKCP Release
 on:
   repository_dispatch:
-    types: [release]
+    types:
+      - New XKCP Release
 jobs:
   fetch-new-xkcp-artifacts-and-create-pr:
     runs-on: ubuntu-latest
