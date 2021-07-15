@@ -37,9 +37,9 @@ jobs:
           git config user.email "daemon@stirlinglabs.com"
           git config user.name "StirlingLabsDaemon"
           # Extract Files
-          tar --overwrite -xzvf XKCP-linux.tar.gz -C XKCP.NET/runtimes/linux-x64/native/ '*.so'
-          tar --overwrite -xzvf XKCP-osx.tar.gz -C XKCP.NET/runtimes/osx-x64/native/ '*.dylib'
-          tar --overwrite -xzvf XKCP-win.tar.gz -C XKCP.NET/runtimes/win-x64/native/ '*.dll'
+          tar --wildcards --overwrite -xzvpf XKCP-linux.tar.gz -C XKCP.NET/runtimes/linux-x64/native/ '*.so'
+          tar --wildcards --overwrite -xzvpf XKCP-osx.tar.gz -C XKCP.NET/runtimes/osx-x64/native/ '*.dylib'
+          tar --wildcards --overwrite -xzvpf XKCP-win.tar.gz -C XKCP.NET/runtimes/win-x64/native/ '*.dll'
           # Commit changes
           git add -A XKCP.NET/runtimes
           git commit -m "New version of StirlingLabs/XKCP ${{ github.event.client_payload.tag }}"
