@@ -33,7 +33,7 @@ jobs:
           dst: coverage
           overwrite: true
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v0.1.12
         with:
           name: XKCP.NET
           files: |
