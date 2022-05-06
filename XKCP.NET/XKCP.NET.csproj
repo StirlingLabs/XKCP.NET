@@ -3,12 +3,14 @@
     <PropertyGroup>
         <OutputType>Library</OutputType>
         <RootNamespace>StirlingLabs</RootNamespace>
-        <TargetFramework>net5.0</TargetFramework>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <PackageOutputPath>../artifacts</PackageOutputPath>
         <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
         <DeterministicSourcePaths Condition="'$(Configuration)'=='Release'">true</DeterministicSourcePaths>
+        <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+        <LangVersion>10</LangVersion>
+        <AssemblyName>StirlingLabs.XKCP.NET</AssemblyName>
+        <PackageId>StirlingLabs.XKCP.NET</PackageId>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations" Version="2021.1.0" PrivateAssets="All" />

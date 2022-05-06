@@ -4,65 +4,65 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using NUnit.Framework;
 
-namespace StirlingLabs
-{
-    public class XkcpTests
-    {
-        [Test, Order(-1)]
-        public void Init()
-            => Xkcp.Init();
+namespace StirlingLabs; 
 
-        public static IEnumerable<object[]> Sha3_256Source
-        {
-            get {
-                yield return new object[]
+public class XkcpTests
+{
+    [Test, Order(-1)]
+    public void Init()
+        => Xkcp.Init();
+
+    public static IEnumerable<object[]> Sha3_256Source
+    {
+        get {
+            yield return new object[]
+            {
+                // ReSharper disable once StringLiteralTypo
+                Encoding.UTF8.GetBytes("abc"),
+                new byte[]
                 {
-                    // ReSharper disable once StringLiteralTypo
-                    Encoding.UTF8.GetBytes("abc"),
-                    new byte[]
-                    {
-                        0x3a, 0x98, 0x5d, 0xa7, 0x4f, 0xe2, 0x25, 0xb2,
-                        0x04, 0x5c, 0x17, 0x2d, 0x6b, 0xd3, 0x90, 0xbd,
-                        0x85, 0x5f, 0x08, 0x6e, 0x3e, 0x9d, 0x52, 0x5b,
-                        0x46, 0xbf, 0xe2, 0x45, 0x11, 0x43, 0x15, 0x32
-                    }
-                };
-                yield return new object[]
+                    0x3a, 0x98, 0x5d, 0xa7, 0x4f, 0xe2, 0x25, 0xb2,
+                    0x04, 0x5c, 0x17, 0x2d, 0x6b, 0xd3, 0x90, 0xbd,
+                    0x85, 0x5f, 0x08, 0x6e, 0x3e, 0x9d, 0x52, 0x5b,
+                    0x46, 0xbf, 0xe2, 0x45, 0x11, 0x43, 0x15, 0x32
+                }
+            };
+            yield return new object[]
+            {
+                Array.Empty<byte>(),
+                new byte[]
                 {
-                    Array.Empty<byte>(),
-                    new byte[]
-                    {
-                        0xa7, 0xff, 0xc6, 0xf8, 0xbf, 0x1e, 0xd7, 0x66,
-                        0x51, 0xc1, 0x47, 0x56, 0xa0, 0x61, 0xd6, 0x62,
-                        0xf5, 0x80, 0xff, 0x4d, 0xe4, 0x3b, 0x49, 0xfa,
-                        0x82, 0xd8, 0x0a, 0x4b, 0x80, 0xf8, 0x43, 0x4a
-                    }
-                };
-                yield return new object[]
+                    0xa7, 0xff, 0xc6, 0xf8, 0xbf, 0x1e, 0xd7, 0x66,
+                    0x51, 0xc1, 0x47, 0x56, 0xa0, 0x61, 0xd6, 0x62,
+                    0xf5, 0x80, 0xff, 0x4d, 0xe4, 0x3b, 0x49, 0xfa,
+                    0x82, 0xd8, 0x0a, 0x4b, 0x80, 0xf8, 0x43, 0x4a
+                }
+            };
+            yield return new object[]
+            {
+                // ReSharper disable once StringLiteralTypo
+                Encoding.UTF8.GetBytes("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"),
+                new byte[]
                 {
-                    // ReSharper disable once StringLiteralTypo
-                    Encoding.UTF8.GetBytes("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"),
-                    new byte[]
-                    {
-                        0x41, 0xc0, 0xdb, 0xa2, 0xa9, 0xd6, 0x24, 0x08,
-                        0x49, 0x10, 0x03, 0x76, 0xa8, 0x23, 0x5e, 0x2c,
-                        0x82, 0xe1, 0xb9, 0x99, 0x8a, 0x99, 0x9e, 0x21,
-                        0xdb, 0x32, 0xdd, 0x97, 0x49, 0x6d, 0x33, 0x76
-                    }
-                };
-                yield return new object[]
+                    0x41, 0xc0, 0xdb, 0xa2, 0xa9, 0xd6, 0x24, 0x08,
+                    0x49, 0x10, 0x03, 0x76, 0xa8, 0x23, 0x5e, 0x2c,
+                    0x82, 0xe1, 0xb9, 0x99, 0x8a, 0x99, 0x9e, 0x21,
+                    0xdb, 0x32, 0xdd, 0x97, 0x49, 0x6d, 0x33, 0x76
+                }
+            };
+            yield return new object[]
+            {
+                // ReSharper disable once StringLiteralTypo
+                Encoding.UTF8.GetBytes(
+                    "abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstu"),
+                new byte[]
                 {
-                    // ReSharper disable once StringLiteralTypo
-                    Encoding.UTF8.GetBytes(
-                        "abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstu"),
-                    new byte[]
-                    {
-                        0x91, 0x6f, 0x60, 0x61, 0xfe, 0x87, 0x97, 0x41,
-                        0xca, 0x64, 0x69, 0xb4, 0x39, 0x71, 0xdf, 0xdb,
-                        0x28, 0xb1, 0xa3, 0x2d, 0xc3, 0x6c, 0xb3, 0x25,
-                        0x4e, 0x81, 0x2b, 0xe2, 0x7a, 0xad, 0x1d, 0x18
-                    }
-                };
+                    0x91, 0x6f, 0x60, 0x61, 0xfe, 0x87, 0x97, 0x41,
+                    0xca, 0x64, 0x69, 0xb4, 0x39, 0x71, 0xdf, 0xdb,
+                    0x28, 0xb1, 0xa3, 0x2d, 0xc3, 0x6c, 0xb3, 0x25,
+                    0x4e, 0x81, 0x2b, 0xe2, 0x7a, 0xad, 0x1d, 0x18
+                }
+            };
 #if !DEBUG
                 var lottaA = new byte[1000000];
                 Unsafe.InitBlock(ref lottaA[0], (byte)'a', 1000000);
@@ -98,20 +98,19 @@ namespace StirlingLabs
                     }
                 };
 #endif
-            }
         }
+    }
 
-        [TestCaseSource(nameof(Sha3_256Source))]
-        public static void Sha3_256(byte[] message, byte[] digest)
-        {
+    [TestCaseSource(nameof(Sha3_256Source))]
+    public static void Sha3_256(byte[] message, byte[] digest)
+    {
 
-            var success = Xkcp.Sha3_256(out var actual, message);
+        var success = Xkcp.Sha3_256(out var actual, message);
 
-            Assert.IsTrue(success);
+        Assert.IsTrue(success);
 
-            var expected = (ReadOnlySpan<byte>)digest;
+        var expected = (ReadOnlySpan<byte>)digest;
 
-            Assert.IsTrue(expected.SequenceEqual((Span<byte>)actual));
-        }
+        Assert.IsTrue(expected.SequenceEqual((Span<byte>)actual));
     }
 }
