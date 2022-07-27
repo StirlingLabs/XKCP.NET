@@ -1,7 +1,7 @@
 ﻿# Summary
 |||
 |:---|:---|
-| Generated on: | 05/06/2022 - 19:17:21 |
+| Generated on: | 07/27/2022 - 16:27:14 |
 | Parser: | LCovParser |
 | Assemblies: | 1 |
 | Classes: | 14 |
