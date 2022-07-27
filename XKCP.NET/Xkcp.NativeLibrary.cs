@@ -22,7 +22,7 @@ public static partial class Xkcp
                 if (NativeLibrary.TryLoad("XKCP-AVX2", out lib))
                     return lib;
             if (Sse3.IsSupported)
-                if (NativeLibrary.TryLoad("XKCP-SSE3", out lib))
+                if (NativeLibrary.TryLoad("XKCP-SSSE3", out lib))
                     return lib;
             if (NativeLibrary.TryLoad("XKCP", out lib))
                 return lib;
@@ -31,51 +31,51 @@ public static partial class Xkcp
             {
                 if (Avx512IsSupported)
                 {
-                    if (NativeLibrary.TryLoad("XKCP-AVX512", out lib))
+                    if (NativeLibrary.TryLoad("XKCP-AVX512.dll", out lib))
                         return lib;
-                    if (NativeLibrary.TryLoad("runtimes/win-x64/native/XKCP-AVX512", out lib))
+                    if (NativeLibrary.TryLoad("runtimes/win-x64/native/XKCP-AVX512.dll", out lib))
                         return lib;
                 }
                 if (Avx2.IsSupported)
                 {
-                    if (NativeLibrary.TryLoad("XKCP-AVX2", out lib))
+                    if (NativeLibrary.TryLoad("XKCP-AVX2.dll", out lib))
                         return lib;
-                    if (NativeLibrary.TryLoad("runtimes/win-x64/native/XKCP-AVX2", out lib))
+                    if (NativeLibrary.TryLoad("runtimes/win-x64/native/XKCP-AVX2.dll", out lib))
                         return lib;
                 }
                 if (Sse3.IsSupported)
                 {
-                    if (NativeLibrary.TryLoad("XKCP-SSE3", out lib))
+                    if (NativeLibrary.TryLoad("XKCP-SSSE3.dll", out lib))
                         return lib;
-                    if (NativeLibrary.TryLoad("runtimes/win-x64/native/XKCP-SSE3", out lib))
+                    if (NativeLibrary.TryLoad("runtimes/win-x64/native/XKCP-SSSE3.dll", out lib))
                         return lib;
                 }
-                if (NativeLibrary.TryLoad("XKCP", out lib))
+                if (NativeLibrary.TryLoad("XKCP.dll", out lib))
                     return lib;
-                if (NativeLibrary.TryLoad("runtimes/win-x64/native/XKCP", out lib))
+                if (NativeLibrary.TryLoad("runtimes/win-x64/native/XKCP.dll", out lib))
                     return lib;
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
                 if (Avx512IsSupported)
                 {
-                    if (NativeLibrary.TryLoad("libXKCP-AVX512.so", out lib))
+                    if (NativeLibrary.TryLoad("./libXKCP-AVX512.so", out lib))
                         return lib;
                     if (NativeLibrary.TryLoad("runtimes/linux-x64/native/libXKCP-AVX512.so", out lib))
                         return lib;
                 }
                 if (Avx2.IsSupported)
                 {
-                    if (NativeLibrary.TryLoad("libXKCP-AVX2.so", out lib))
+                    if (NativeLibrary.TryLoad("./libXKCP-AVX2.so", out lib))
                         return lib;
                     if (NativeLibrary.TryLoad("runtimes/linux-x64/native/libXKCP-AVX2.so", out lib))
                         return lib;
                 }
                 if (Sse3.IsSupported)
                 {
-                    if (NativeLibrary.TryLoad("libXKCP-SSE3.so", out lib))
+                    if (NativeLibrary.TryLoad("./libXKCP-SSSE3.so", out lib))
                         return lib;
-                    if (NativeLibrary.TryLoad("runtimes/linux-x64/native/libXKCP-SSE3.so", out lib))
+                    if (NativeLibrary.TryLoad("runtimes/linux-x64/native/libXKCP-SSSE3.so", out lib))
                         return lib;
                 }
                 if (NativeLibrary.TryLoad("libXKCP.so", out lib))
@@ -87,28 +87,28 @@ public static partial class Xkcp
             {
                 if (Avx512IsSupported)
                 {
-                    if (NativeLibrary.TryLoad("libXKCP-AVX512.dylib", out lib))
+                    if (NativeLibrary.TryLoad("./libXKCP-AVX512.dylib", out lib))
                         return lib;
-                    if (NativeLibrary.TryLoad("runtimes/osx-x64/native/libXKCP-AVX512.dylib", out lib))
+                    if (NativeLibrary.TryLoad("runtimes/osx/native/libXKCP-AVX512.dylib", out lib))
                         return lib;
                 }
                 if (Avx2.IsSupported)
                 {
-                    if (NativeLibrary.TryLoad("libXKCP-AVX2.dylib", out lib))
+                    if (NativeLibrary.TryLoad("./libXKCP-AVX2.dylib", out lib))
                         return lib;
-                    if (NativeLibrary.TryLoad("runtimes/osx-x64/native/libXKCP-AVX2.dylib", out lib))
+                    if (NativeLibrary.TryLoad("runtimes/osx/native/libXKCP-AVX2.dylib", out lib))
                         return lib;
                 }
                 if (Sse3.IsSupported)
                 {
-                    if (NativeLibrary.TryLoad("libXKCP-SSE3.dylib", out lib))
+                    if (NativeLibrary.TryLoad("./libXKCP-SSSE3.dylib", out lib))
                         return lib;
-                    if (NativeLibrary.TryLoad("runtimes/osx-x64/native/libXKCP-SSE3.dylib", out lib))
+                    if (NativeLibrary.TryLoad("runtimes/osx/native/libXKCP-SSSE3.dylib", out lib))
                         return lib;
                 }
-                if (NativeLibrary.TryLoad("libXKCP.dylib", out lib))
+                if (NativeLibrary.TryLoad("./libXKCP.dylib", out lib))
                     return lib;
-                if (NativeLibrary.TryLoad("runtimes/osx-x64/native/libXKCP.dylib", out lib))
+                if (NativeLibrary.TryLoad("runtimes/osx/native/libXKCP.dylib", out lib))
                     return lib;
             }
 

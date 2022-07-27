@@ -4,29 +4,57 @@
         <OutputType>Library</OutputType>
         <RootNamespace>StirlingLabs</RootNamespace>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <PackageOutputPath>../artifacts</PackageOutputPath>
-        <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
         <DeterministicSourcePaths Condition="'$(Configuration)'=='Release'">true</DeterministicSourcePaths>
-        <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+        <TargetFrameworks>net6.0;net5.0</TargetFrameworks>
         <LangVersion>10</LangVersion>
         <AssemblyName>StirlingLabs.XKCP.NET</AssemblyName>
         <PackageId>StirlingLabs.XKCP.NET</PackageId>
+
+        <TargetFrameworks Condition="'$(TFM)'==''">net6.0;net5.0</TargetFrameworks>
+        <TargetFramework Condition="'$(TFM)'!=''">$(TFM)</TargetFramework>
+        <TargetFramework Condition="'$(TFM)'==''" />
+        
+        <RuntimeIdentifiers Condition="'$(RID)'==''">win-x64;linux-x64;osx</RuntimeIdentifiers>
+        <RuntimeIdentifier Condition="'$(RID)'!=''">$(RID)</RuntimeIdentifier>
+        <RuntimeIdentifier Condition="'$(RID)'==''" />
     </PropertyGroup>
+
+    <PropertyGroup Condition="'$(CI)'!='' And '$(RID)'==''">
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageOutputPath>../artifacts</PackageOutputPath>
+    </PropertyGroup>
+    
     <ItemGroup>
-        <PackageReference Include="JetBrains.Annotations" Version="2021.1.0" PrivateAssets="All" />
+        <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" PrivateAssets="All" />
     </ItemGroup>
+    
     <ItemGroup>
-        <None Include="runtimes\*\**">
+        <None Remove="**/.*" />
+    </ItemGroup>
+    
+    <ItemGroup Condition="'$(RuntimeIdentifier)'==''">
+        <Content Include="runtimes/**/*" Exclude="runtimes/**/.keep">
             <Pack>True</Pack>
-            <PackagePath>runtimes\</PackagePath>
-            <PackageCopyToOutput>False</PackageCopyToOutput>
+            <PackageCopyToOutput>True</PackageCopyToOutput>
+            <PackagePath>%(Identity)</PackagePath>
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
             <Link>%(Identity)</Link>
-        </None>
-        <Content Remove="runtimes\*\**" />
+        </Content>
     </ItemGroup>
+
+    <ItemGroup Condition="'$(RuntimeIdentifier)'!=''">
+        <ContentWithTargetPath Include="runtimes/$(RuntimeIdentifier)/native/*" Exclude="runtimes/$(RuntimeIdentifier)/native/.keep">
+            <Pack>False</Pack>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+            <Link>%(Filename)%(Extension)</Link>
+            <TargetPath>%(Filename)%(Extension)</TargetPath>
+        </ContentWithTargetPath>
+    </ItemGroup>
+
     <ImportGroup>
         <Import Project="../Version.proj" />
     </ImportGroup>
+
 </Project>
