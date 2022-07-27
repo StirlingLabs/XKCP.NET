@@ -6,7 +6,8 @@
     <IsPackable>false</IsPackable>
 
     <RootNamespace>StirlingLabs</RootNamespace>
-    
+    <RuntimeIdentifier>$(NETCoreSdkRuntimeIdentifier)</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)'==''">$([System.Runtime.InteropServices.RuntimeInformation]::RuntimeIdentifier)</RuntimeIdentifier>
     <CollectCoverage>true</CollectCoverage>
     <CoverletOutputFormat>lcov</CoverletOutputFormat>
     <CoverletOutput>../coverage/</CoverletOutput>
@@ -17,18 +18,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.13.2" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
-    <PackageReference Include="coverlet.collector" Version="3.0.3" PrivateAssets="all" />
-    <PackageReference Include="coverlet.msbuild" Version="3.0.3" PrivateAssets="all" />
-    <PackageReference Include="GitHubActionsTestLogger" Version="1.2.0" PrivateAssets="all" />
-    <PackageReference Include="ReportGenerator" Version="4.8.11" PrivateAssets="all" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageReference Include="coverlet.collector" Version="3.1.2" PrivateAssets="all" />
+    <PackageReference Include="coverlet.msbuild" Version="3.1.2" PrivateAssets="all" />
+    <PackageReference Include="GitHubActionsTestLogger" Version="2.0.1" PrivateAssets="all" />
+    <PackageReference Include="ReportGenerator" Version="5.1.9" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\XKCP.NET\XKCP.NET.csproj" />
+    <ProjectReference Include="..\XKCP.NET\XKCP.NET.csproj">
+      <Properties>TFM=$(TargetFramework);RID=$(RuntimeIdentifier)</Properties>
+      <SetTargetFramework>TargetFramework=$(TargetFramework)</SetTargetFramework>
+    </ProjectReference>
   </ItemGroup>
+  
+  
   <Target Name="GenerateHtmlCoverageReport" AfterTargets="GenerateCoverageResultAfterTest">
     <!-- remove absolute path using backslashes for windows -->
     <ReplaceFileTextByLines Condition="$(OS.StartsWith('Windows'))" InputFilename="@(CoverletReport)" OutputFilename="@(CoverletReport)" MatchText="$([System.IO.Path]::GetFullPath('..\XKCP.NET\'))" ReplacementText="" />
@@ -64,4 +70,9 @@
       </Code>
     </Task>
   </UsingTask>
+
+  <Target Name="RIDCheck" BeforeTargets="Build">
+    <Error Condition="'$(TargetFramework)'==''" Text="TargetFramework is not specified!" />
+    <Error Condition="'$(RuntimeIdentifier)'==''" Text="RuntimeIdentifier is not specified!" />
+  </Target>
 </Project>

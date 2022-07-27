@@ -10,6 +10,8 @@
         <GitCommitsIgnoreMerges>true</GitCommitsIgnoreMerges>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageIcon>SL.png</PackageIcon>
+        
+        <AddSyntheticProjectReferencesForSolutionDependencies>false</AddSyntheticProjectReferencesForSolutionDependencies>
     </PropertyGroup>
     <ImportGroup>
         <Import Project="StirlingLabs.Version/Version.proj" />
