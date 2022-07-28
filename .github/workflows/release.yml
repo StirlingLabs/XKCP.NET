@@ -1,0 +1,44 @@
+name: Release
+on:
+  push:
+    tags:
+      - 'v[0-9]+.*'
+
+jobs:
+  integration:
+    name: Integration
+    uses: ./.github/workflows/integrate.yml
+  
+  create-release:
+    name: Perform Release
+    needs: integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts from Integration
+        uses: actions/download-artifact@v3
+      - name: List Files
+        run: ls -lR
+      - name: Upload NuPkg to GitHub & NuGet
+        working-directory: ./XKCP.NET
+        run: |
+          dotnet nuget push artifacts/*.nupkg -k ${{github.token}} -s https://nuget.pkg.github.com/${{github.repository_owner}}/index.json --no-symbols --skip-duplicate || true
+          dotnet nuget push artifacts/*.nupkg -k ${{secrets.NUGET_STIRLINGLABS_API_KEY}} -s https://api.nuget.org/v3/index.json --no-symbols --skip-duplicate
+      - name: Save coverage to storage branch
+        uses: StirlingLabs/action-storage@v21.07.2
+        with:
+          comment: |
+            Coverage for ${{github.ref}}
+            Action: https://github.com/${{github.repository_owner}}/${{github.repository}}/actions/runs/${{github.run_id}}
+            Commit: https://github.com/${{github.repository_owner}}/${{github.repository}}/commit/${{github.sha}}
+          storage-branch: coverage
+          src: XKCP.Net/coverage
+          dst: coverage
+          overwrite: true
+      - name: Add Artifacts to Repo
+        uses: softprops/action-gh-release@v0.1.14
+        with:
+          name: XKCP.NET
+          files: |
+            XKCP.NET/artifacts/*.nupkg
+        env:
+          GITHUB_TOKEN: ${{github.token}}
