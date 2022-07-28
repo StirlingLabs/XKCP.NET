@@ -1,15 +1,16 @@
-name: Create PR from new XKCP Release
+name: Receive New XKCP
 on:
   repository_dispatch:
     types:
       - New XKCP Release
 jobs:
   fetch-new-xkcp-artifacts-and-create-pr:
+    name: Received New XKCP
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Download Windows Release
-        uses: dsaltares/fetch-gh-release-asset@master
+        uses: dsaltares/fetch-gh-release-asset@v1
         with:
           repo: "StirlingLabs/XKCP"
           version: "tags/${{ github.event.client_payload.tag }}"
@@ -17,7 +18,7 @@ jobs:
           target: "XKCP-win.tar.gz"
           token: ${{ github.token }}
       - name: Download OSX Release
-        uses: dsaltares/fetch-gh-release-asset@master
+        uses: dsaltares/fetch-gh-release-asset@v1
         with:
           repo: "StirlingLabs/XKCP"
           version: "tags/${{ github.event.client_payload.tag }}"
@@ -25,7 +26,7 @@ jobs:
           target: "XKCP-osx.tar.gz"
           token: ${{ github.token }}
       - name: Download Linux Release
-        uses: dsaltares/fetch-gh-release-asset@master
+        uses: dsaltares/fetch-gh-release-asset@v1
         with:
           repo: "StirlingLabs/XKCP"
           version: "tags/${{ github.event.client_payload.tag }}"
@@ -46,7 +47,7 @@ jobs:
           rm -rf XKCP-*.tar.gz
           git commit -am "New version of StirlingLabs/XKCP ${{ github.event.client_payload.tag }}"
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ github.token }}
           title: 'New version of StirlingLabs/XKCP ${{ github.event.client_payload.tag }}'

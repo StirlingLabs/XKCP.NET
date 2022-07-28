@@ -1,0 +1,115 @@
+name: Integration
+on:
+  pull_request:
+    branches:
+    - '**'
+    - '!gh-pages'
+
+  push:
+    branches:
+      - master
+      - main
+
+  workflow_call:
+
+jobs:
+  skip_check:
+    name: Run Check
+    continue-on-error: true
+    runs-on: ubuntu-22.04
+    outputs:
+      should_skip: ${{ steps.collate_checks.outputs.should_skip }}
+      run_integration: true
+      run_release: ${{ !steps.collate_checks.outputs.should_skip }}
+    steps:
+    -   name: Check if CI is forced
+        id: force_ci_check
+        if: |
+            github.event_name == 'push' &&
+            contains(github.event.head_commit.message, '[force ci]')
+        run: |
+            echo "::set-output name=should_skip::false"
+    -   name: Check if PR is a draft
+        id: pr_draft_check
+        if: |
+          github.event.pull_request &&
+          (steps.force_ci_check.outcome == 'skipped' || steps.force_ci_check.outputs.should_skip != 'false')
+        env:
+            draft: ${{ github.event.pull_request.draft }}
+        run: |
+            echo "::set-output name=should_skip::$draft"
+    -   name: Check if this is a Release
+        id: released_check
+        if: |
+            github.event_name == 'push' &&
+            github.ref_type == 'tag' &&
+            startsWith(github.ref_name, 'v')
+        run: |
+            echo "::set-output name=should_skip::false"
+    -   name: Check if changes pushed
+        id: push_new_check
+        if: |
+            github.event_name == 'push' &&
+            (steps.force_ci_check.outcome == 'skipped' || steps.force_ci_check.outputs.should_skip != 'false') &&
+            (steps.released_check.outcome == 'skipped' || steps.released_check.outputs.should_skip != 'false')
+        uses: fkirc/skip-duplicate-actions@v4
+        with:
+            skip_after_successful_duplicate: 'true'
+            paths_ignore: '["**/README.md", ".idea/**", ".editorconfig", ".git*", "docs/**", ".github/**", "**/Doxyfile.in"]'
+    -   name: Collate Checks
+        id: collate_checks
+        if: |
+            (steps.pr_draft_check.outcome == 'skipped' || steps.pr_draft_check.outputs.should_skip != 'false') &&
+            (steps.force_ci_check.outcome == 'skipped' || steps.force_ci_check.outputs.should_skip != 'false') &&
+            (steps.released_check.outcome == 'skipped' || steps.released_check.outputs.should_skip != 'false') &&
+            (steps.push_new_check.outcome == 'skipped' || steps.push_new_check.outputs.should_skip == 'true')
+        env:
+            pr_draft_check: ${{ steps.pr_draft_check.outcome }}
+            force_ci_check: ${{ steps.force_ci_check.outcome }}
+            released_check: ${{ steps.released_check.outcome }}
+            push_new_check: ${{ steps.push_new_check.outcome }}
+        run: |
+            echo "Step status was $pr_draft_check : $force_ci_check : $released_check : $push_new_check"
+            if [ "$pr_draft_check" == "skipped" ] && \
+                [ "$force_ci_check" == "skipped" ] && \
+                [ "$released_check" == "skipped" ] && \
+                [ "$push_new_check" == "skipped" ]
+            then
+                echo "All checks skipped, I don't know what to do."
+                exit 1
+            else
+                echo "::set-output name=should_skip::true"
+            fi
+
+  build-and-test:
+    name: Build & Test
+    needs: skip_check
+    if: needs.skip_check.outputs.should_skip != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Fetch tag git metadata
+        run: git fetch --force --update-shallow --depth 1 origin +refs/tags/*:refs/tags/* || echo no tags
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+      - name: Build
+        run: dotnet build XKCP.NET.sln -c Release
+      - name: Test
+        run: dotnet test XKCP.NET.sln --no-build -c Release --logger GitHubActions
+      - name: Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: XKCP.NET
+          path: |
+            artifacts/*.nupkg
+            coverage
+          if-no-files-found: error
+      - name: Report Coverage to PR
+        if: github.event.pull_request
+        uses: StirlingLabs/PROutputAction@v1.0.1
+        with:
+          sources: '.github/coverage/prefix,coverage/,.github/coverage/suffix'
+          token: ${{github.token}}
