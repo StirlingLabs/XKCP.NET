@@ -1,0 +1,76 @@
+name: Documentation
+
+on:
+    push:
+        tags:
+        - 'v*'
+        branches:
+        - 'main'
+        - 'master'
+
+    workflow_call:
+        inputs:
+            tag:
+                description: 'Tag (Release Version)'
+                required: true
+                type: string
+            commit:
+                description: 'Commit Hash'
+                required: false
+                type: string
+
+    workflow_dispatch:
+        inputs:
+            tag:
+                description: 'Tag (Release Version)'
+                required: true
+                type: string
+            commit:
+                description: 'Commit Hash'
+                required: false
+                type: string
+
+defaults:
+    run:
+        shell: bash
+
+jobs:
+    generate_docs:
+        name: Generate Documentation
+        runs-on: ubuntu-20.04
+        steps:
+        -   uses: actions/checkout@v3
+            with:
+                fetch-depth: 0
+        -   name: Install Requirements
+            run: |
+                sudo apt install doxygen python3-clang-11
+                pip install -r requirements.txt
+            working-directory: ./docs/Sphinx
+        -   name: Build documentation
+            run: |
+                make html
+            working-directory: ./docs/Sphinx
+        -   name: Create index
+            shell: bash
+            working-directory: ./docs/html/
+            env:
+                filename: index.html
+            run: |
+                doubleQuote=\" 
+                singleQuote=\'
+                url="${singleQuote}/${GITHUB_REPOSITORY#*/}/${GITHUB_REF#refs/heads/}/${singleQuote}"
+                content="content=${doubleQuote}0; url=${url}${doubleQuote}"
+                meta="<meta http-equiv=${doubleQuote}Refresh${doubleQuote} ${content} />"
+                body='<body>Redirecting</body>'
+                index="<html><head>${meta}</head>${body}</html>"
+                echo "${index}" > $filename
+                cat $filename
+                touch .nojekyll
+        -   name: Commit documentation
+            uses: StirlingLabs/BranchStorageAction@main
+            with:
+                prune: true
+                src: docs/html/*
+                dst: .
+                storage-branch: gh-pages

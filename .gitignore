@@ -386,3 +386,6 @@ FodyWeavers.xsd
 /coverage
 
 .DS_Store
+doc/Doxygen/xml
+docs/Doxygen/xml
+docs/html

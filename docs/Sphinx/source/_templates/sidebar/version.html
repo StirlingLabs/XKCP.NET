@@ -1,0 +1,9 @@
+{# Add version selector for sphinx-multiversion #}
+{% if READTHEDOCS %}
+{% else %}
+<div class="sidebar-tree">
+    <p class="caption" role="heading">
+        <span class="caption-text">{{ current_version.name }}</span>
+      </p>
+</div>
+{% endif %}

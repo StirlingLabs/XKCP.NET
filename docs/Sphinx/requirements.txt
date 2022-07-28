@@ -1,0 +1,11 @@
+clang==11
+furo==2022.6.21
+hawkmoth==0.11.0
+myst-parser==0.18.0
+Sphinx==5.0.2
+sphinx-multiversion==0.2.4
+sphinxext-opengraph==0.6.3
+sphinx-sitemap==2.2.0
+breathe==4.34.0
+Pygments>=2.12.0
+git+https://github.com/rogerbarton/sphinx-csharp.git@master#egg=sphinx-csharp
