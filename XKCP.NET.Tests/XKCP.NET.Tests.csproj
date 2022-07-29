@@ -8,6 +8,7 @@
     <RootNamespace>StirlingLabs</RootNamespace>
     <RuntimeIdentifier>$(NETCoreSdkRuntimeIdentifier)</RuntimeIdentifier>
     <RuntimeIdentifier Condition="'$(RuntimeIdentifier)'==''">$([System.Runtime.InteropServices.RuntimeInformation]::RuntimeIdentifier)</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="$(RuntimeIdentifier.StartsWith('osx'))">osx</RuntimeIdentifier>
     <CollectCoverage>true</CollectCoverage>
     <CoverletOutputFormat>lcov</CoverletOutputFormat>
     <CoverletOutput>../coverage/</CoverletOutput>
