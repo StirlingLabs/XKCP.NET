@@ -21,7 +21,13 @@ public static partial class Xkcp
             if (Avx2.IsSupported)
                 if (NativeLibrary.TryLoad("XKCP-AVX2", out lib))
                     return lib;
-            if (Sse3.IsSupported)
+            if (Avx.IsSupported)
+                if (NativeLibrary.TryLoad("XKCP-AVX", out lib))
+                    return lib;
+            if (Sse42.IsSupported)
+                if (NativeLibrary.TryLoad("XKCP-SSSE3", out lib))
+                    return lib;
+            if (Ssse3.IsSupported)
                 if (NativeLibrary.TryLoad("XKCP-SSSE3", out lib))
                     return lib;
             if (NativeLibrary.TryLoad("XKCP", out lib))
@@ -43,7 +49,21 @@ public static partial class Xkcp
                     if (NativeLibrary.TryLoad("runtimes/win-x64/native/XKCP-AVX2.dll", out lib))
                         return lib;
                 }
-                if (Sse3.IsSupported)
+                if (Avx.IsSupported)
+                {
+                    if (NativeLibrary.TryLoad("XKCP-AVX.dll", out lib))
+                        return lib;
+                    if (NativeLibrary.TryLoad("runtimes/win-x64/native/XKCP-AVX.dll", out lib))
+                        return lib;
+                }
+                if (Sse42.IsSupported)
+                {
+                    if (NativeLibrary.TryLoad("XKCP-SSE42.dll", out lib))
+                        return lib;
+                    if (NativeLibrary.TryLoad("runtimes/win-x64/native/XKCP-SSE42.dll", out lib))
+                        return lib;
+                }
+                if (Ssse3.IsSupported)
                 {
                     if (NativeLibrary.TryLoad("XKCP-SSSE3.dll", out lib))
                         return lib;
@@ -71,7 +91,21 @@ public static partial class Xkcp
                     if (NativeLibrary.TryLoad("runtimes/linux-x64/native/libXKCP-AVX2.so", out lib))
                         return lib;
                 }
-                if (Sse3.IsSupported)
+                if (Avx.IsSupported)
+                {
+                    if (NativeLibrary.TryLoad("./libXKCP-AVX.so", out lib))
+                        return lib;
+                    if (NativeLibrary.TryLoad("runtimes/linux-x64/native/libXKCP-AVX.so", out lib))
+                        return lib;
+                }
+                if (Sse42.IsSupported)
+                {
+                    if (NativeLibrary.TryLoad("./libXKCP-SSE42.so", out lib))
+                        return lib;
+                    if (NativeLibrary.TryLoad("runtimes/linux-x64/native/libXKCP-SSE42.so", out lib))
+                        return lib;
+                }
+                if (Ssse3.IsSupported)
                 {
                     if (NativeLibrary.TryLoad("./libXKCP-SSSE3.so", out lib))
                         return lib;
@@ -99,7 +133,21 @@ public static partial class Xkcp
                     if (NativeLibrary.TryLoad("runtimes/osx/native/libXKCP-AVX2.dylib", out lib))
                         return lib;
                 }
-                if (Sse3.IsSupported)
+                if (Avx.IsSupported)
+                {
+                    if (NativeLibrary.TryLoad("./libXKCP-AVX.dylib", out lib))
+                        return lib;
+                    if (NativeLibrary.TryLoad("runtimes/osx/native/libXKCP-AVX.dylib", out lib))
+                        return lib;
+                }
+                if (Sse42.IsSupported)
+                {
+                    if (NativeLibrary.TryLoad("./libXKCP-SSE42.dylib", out lib))
+                        return lib;
+                    if (NativeLibrary.TryLoad("runtimes/osx/native/libXKCP-SSE42.dylib", out lib))
+                        return lib;
+                }
+                if (Ssse3.IsSupported)
                 {
                     if (NativeLibrary.TryLoad("./libXKCP-SSSE3.dylib", out lib))
                         return lib;
