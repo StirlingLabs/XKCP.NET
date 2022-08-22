@@ -14,9 +14,7 @@
         <TargetFramework Condition="'$(TFM)'!=''">$(TFM)</TargetFramework>
         <TargetFramework Condition="'$(TFM)'==''" />
         
-        <RuntimeIdentifiers Condition="'$(RID)'==''">win-x64;linux-x64;osx</RuntimeIdentifiers>
-        <RuntimeIdentifier Condition="'$(RID)'!=''">$(RID)</RuntimeIdentifier>
-        <RuntimeIdentifier Condition="'$(RID)'==''" />
+        <RuntimeIdentifiers>win-x64;linux-x64;osx</RuntimeIdentifiers>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(CI)'!='' And '$(RID)'==''">
