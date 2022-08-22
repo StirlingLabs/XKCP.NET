@@ -25,7 +25,7 @@ public static partial class Xkcp
                 if (NativeLibrary.TryLoad("XKCP-AVX", out lib))
                     return lib;
             if (Sse42.IsSupported)
-                if (NativeLibrary.TryLoad("XKCP-SSSE3", out lib))
+                if (NativeLibrary.TryLoad("XKCP-SSE42", out lib))
                     return lib;
             if (Ssse3.IsSupported)
                 if (NativeLibrary.TryLoad("XKCP-SSSE3", out lib))
