@@ -12,8 +12,6 @@
   
 <meta property="og:site_name" content="XKCP.NET" />
   
-<meta property="og:description" content="Typedefs" />
-  
 <meta property="og:image" content="https://stirlinglabs.github.io/libsa/main/_static/libsa-social.jpg" />
   
 <meta property="og:image:alt" content="XKCP.NET" />
@@ -198,6 +196,14 @@
 </div></div>
 <div class="sidebar-tree">
   <p class="caption" role="heading">
+    <span class="caption-text">Branches</span>
+  </p>
+  <ul>
+    <li class="toctree-l1">
+      <a class="reference internal" href="../../../master/XKCP.NET/Buffers/BufferHelper.html">master</a>
+    </li>
+  </ul>
+  <p class="caption" role="heading">
     <span class="caption-text">Releases</span>
   </p>
   <ul>
@@ -240,29 +246,6 @@
         <article role="main">
           <section id="bufferhelper-cs">
 <h1>BufferHelper.cs<a class="headerlink" href="#bufferhelper-cs" title="Permalink to this heading">#</a></h1>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
-<dl class="cs type">
-<dt class="sig sig-object cs">
-<span class="target" id="_buffer_helper_8cs_1a8b6b53b142f16cbdb9e6b191088e7cd3"></span><span class="sig-name descname"><span class="pre">X86Sse42</span> <span class="pre">=</span> <span class="pre">System.Runtime.Intrinsics.X86.Sse42</span></span></dt>
-<dd></dd></dl>
-
-<dl class="cs type">
-<dt class="sig sig-object cs">
-<span class="target" id="_buffer_helper_8cs_1a02679a4a9c84de0513f0ea2f8d85ea7f"></span><span class="sig-name descname"><span class="pre">X64Sse42</span> <span class="pre">=</span> <span class="pre">System.Runtime.Intrinsics.X86.Sse42.X64</span></span></dt>
-<dd></dd></dl>
-
-<dl class="cs type">
-<dt class="sig sig-object cs">
-<span class="target" id="_buffer_helper_8cs_1a94d7a50bc16c3f99a28f2b4a31b05d5a"></span><span class="sig-name descname"><span class="pre">Arm32Crc32</span> <span class="pre">=</span> <span class="pre">System.Runtime.Intrinsics.Arm.Crc32</span></span></dt>
-<dd></dd></dl>
-
-<dl class="cs type">
-<dt class="sig sig-object cs">
-<span class="target" id="_buffer_helper_8cs_1a41dc52a8ca06a472605727f400ad3250"></span><span class="sig-name descname"><span class="pre">Arm64Crc32</span> <span class="pre">=</span> <span class="pre">System.Runtime.Intrinsics.Arm.Crc32.Arm64</span></span></dt>
-<dd></dd></dl>
-
-</div>
 <dl class="cs class">
 <dt class="sig sig-object cs" id="class-BufferHelper">
 <span class="target" id="class_buffer_helper"></span><em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">BufferHelper</span></span><a class="headerlink" href="#class-BufferHelper" title="Permalink to this definition">#</a></dt>
@@ -274,31 +257,19 @@
 <dd></dd></dl>
 
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-package-static-functions">Package Static Functions</p>
+<dl class="cs function">
+<dt class="sig sig-object cs" id="function-BufferHelper.ToHexString">
+<span class="target" id="class_buffer_helper_1ac6eb384003cd882c531618bb49b1f08f"></span><em class="property"><span class="pre">unsafe</span></em> <span class="pre">string</span> <span class="sig-name descname"><span class="pre">ToHexString</span></span> <span class="sig-paren">(</span><span class="pre">ReadOnlySpan</span><span class="pre">&lt;</span><span class="pre">byte</span><span class="pre">&gt;</span> <em><span class="pre">bytes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#function-BufferHelper.ToHexString" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</div>
 </dd></dl>
 
 <dl class="cs namespace">
 <dt class="sig sig-object cs" id="namespace-System">
 <span class="target" id="namespace_system"></span><em class="property"><span class="pre">namespace</span> </em><span class="sig-name descname"><span class="pre">System</span></span><a class="headerlink" href="#namespace-System" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="cs namespace">
-<dt class="sig sig-object cs" id="namespace-X86Sse42">
-<span class="target" id="namespace_x86_sse42"></span><em class="property"><span class="pre">namespace</span> </em><span class="sig-name descname"><span class="pre">X86Sse42</span></span><a class="headerlink" href="#namespace-X86Sse42" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="cs namespace">
-<dt class="sig sig-object cs" id="namespace-X64Sse42">
-<span class="target" id="namespace_x64_sse42"></span><em class="property"><span class="pre">namespace</span> </em><span class="sig-name descname"><span class="pre">X64Sse42</span></span><a class="headerlink" href="#namespace-X64Sse42" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="cs namespace">
-<dt class="sig sig-object cs" id="namespace-Arm32Crc32">
-<span class="target" id="namespace_arm32_crc32"></span><em class="property"><span class="pre">namespace</span> </em><span class="sig-name descname"><span class="pre">Arm32Crc32</span></span><a class="headerlink" href="#namespace-Arm32Crc32" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="cs namespace">
-<dt class="sig sig-object cs" id="namespace-Arm64Crc32">
-<span class="target" id="namespace_arm64_crc32"></span><em class="property"><span class="pre">namespace</span> </em><span class="sig-name descname"><span class="pre">Arm64Crc32</span></span><a class="headerlink" href="#namespace-Arm64Crc32" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
