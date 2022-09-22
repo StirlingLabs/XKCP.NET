@@ -1,7 +1,7 @@
 ![coverage badge](https://raw.githubusercontent.com/StirlingLabs/XKCP.NET/coverage/coverage/badge_combined.svg)
 [![CodeFactor](https://www.codefactor.io/repository/github/stirlinglabs/xkcp.net/badge?s=8bddb54013ecc622805241b6565eae25fb07ef5c)](https://www.codefactor.io/repository/github/stirlinglabs/xkcp.net)
 
-<img src="https://github.com/StirlingLabs/XKCP.NET/raw/master/docs/XKCP-Anna-banner-dotnet.svg" width="60%" />
+<img src="https://raw.githubusercontent.com/StirlingLabs/XKCP.NET/master/docs/XKCP-Anna-banner-dotnet.svg" width="60%" />
 
 # What is XKCP?
 
