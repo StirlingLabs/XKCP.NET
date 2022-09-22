@@ -14,7 +14,10 @@ public static unsafe partial class Xkcp
     /// <param name="input">Pointer to the input message.</param>
     /// <param name="inputByteLen">The length of the input message in bytes.</param>
     /// <returns>0 if successful, 1 otherwise.</returns>
-    [DllImport("XKCP", EntryPoint = "SHA3_256"), SuppressGCTransition]
+#if NET5_0_OR_GREATER
+    [SuppressGCTransition]
+#endif
+    [DllImport("XKCP", EntryPoint = "SHA3_256")]
     public static extern int Sha3_256(byte* output, byte* input, nuint inputByteLen);
         
     /// <summary>

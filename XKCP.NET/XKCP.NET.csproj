@@ -10,9 +10,8 @@
         <AssemblyName>StirlingLabs.XKCP.NET</AssemblyName>
         <PackageId>StirlingLabs.XKCP.NET</PackageId>
 
-        <TargetFrameworks Condition="'$(TFM)'==''">net6.0;net5.0</TargetFrameworks>
+        <TargetFrameworks Condition="'$(TFM)'==''">net5.0;net6.0;netstandard2.0;netstandard2.1</TargetFrameworks>
         <TargetFramework Condition="'$(TFM)'!=''">$(TFM)</TargetFramework>
-        <TargetFramework Condition="'$(TFM)'==''" />
         
         <RuntimeIdentifiers>win-x64;linux-x64;osx</RuntimeIdentifiers>
     </PropertyGroup>
@@ -24,6 +23,10 @@
     
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" PrivateAssets="All" />
+        <PackageReference Include="StirlingLabs.Utilities.NativeLibrary" Version="22.8.3" Condition="$(TargetFramework.StartsWith('netstandard'))" />
+        <PackageReference Include="System.Memory" Version="4.5.5" Condition="'$(TargetFramework)'=='netstandard2.0'" />
+        <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" Condition="'$(TargetFramework)'=='netstandard2.0'" />
+        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" Condition="$(TargetFramework.StartsWith('netstandard'))" />
     </ItemGroup>
     
     <ItemGroup>
