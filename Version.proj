@@ -6,6 +6,9 @@
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/StirlingLabs/XKCP.NET.git</RepositoryUrl>
         <PackageProjectUrl>https://github.com/StirlingLabs/XKCP.NET</PackageProjectUrl>
+        <description>
+          Wrapper around a library providing free and open-source implementations of the cryptographic schemes defined by the Keccak team.
+        </description>
         <GitDefaultBranch>main</GitDefaultBranch>
         <GitCommitsIgnoreMerges>true</GitCommitsIgnoreMerges>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>

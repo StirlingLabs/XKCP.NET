@@ -10,4 +10,4 @@ This includes the [Keccak sponge function family](https://keccak.team/keccak.htm
 
 ## What is XKCP.Net?
 
-XKCP.Net is a C# wrapper around our fork of XKCP, which builds a NuPkg for easy use in .Net projects.
+XKCP.Net is a C# wrapper around our fork of XKCP, for easy use in .Net projects.
