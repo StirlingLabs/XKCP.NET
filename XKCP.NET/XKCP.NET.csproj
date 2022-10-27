@@ -23,7 +23,7 @@
     
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" PrivateAssets="All" />
-        <PackageReference Include="StirlingLabs.Utilities.NativeLibrary" Version="22.8.3" Condition="$(TargetFramework.StartsWith('netstandard'))" />
+        <PackageReference Include="StirlingLabs.Utilities.NativeLibrary" Version="22.10.0" Condition="$(TargetFramework.StartsWith('netstandard'))" />
         <PackageReference Include="System.Memory" Version="4.5.5" Condition="'$(TargetFramework)'=='netstandard2.0'" />
         <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" Condition="'$(TargetFramework)'=='netstandard2.0'" />
         <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" Condition="$(TargetFramework.StartsWith('netstandard'))" />
