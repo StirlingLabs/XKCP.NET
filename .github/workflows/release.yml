@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts from Integration
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
       - name: List Files
         run: ls -lR
       - name: Upload NuPkg to GitHub & NuGet
